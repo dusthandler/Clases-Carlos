@@ -15,10 +15,38 @@ int main() {
 	printf("Cantidad %i\n", p.getCantidad());
 	p.setCantidad(800);
 	printf("Cantidad %i\n", p.getCantidad());
-	system("pause");
 	
-}
+	Coche ford = Coche(0, 0, 0, 100, 0, 20, 20);
 
+	ford.girar_derecha();
+	ford.acelerar();
+	for (int k = 0; k <= 10; k++) {
+		system("cls");
+		printf("   ");
+		for (int i = 0; i < ford.getMaxx(); i++) {
+			printf(" %d", i);
+			if (i < 10) { printf(" "); }
+		}
+		printf("\n");
+		for (int i = 0; i < ford.getMaxx(); i++) {
+			if (i < 10) { printf(" "); }
+			printf("%d ", i);
+			for (int j = 0; j < ford.getMaxy(); j++) {
+				if (i == ford.getCoordx() && j == ford.getCoordy()) {
+					printf("[x]");
+				}
+				else {
+					printf("[ ]");
+				}
+			}
+			printf("\n");
+		}
+		
+		ford.avanzar();
+		system("pause");
+	}
+
+}
 
 /*
 	-Hacer la clase Coche
@@ -36,7 +64,7 @@ int main() {
 	-Girar izquierda (cambia su orientación un nivel a la izquierda)
 	-parar (para el coche, deja a velocidad 0)
 
-	getter y setter
+	-getter y setter
 
 
 

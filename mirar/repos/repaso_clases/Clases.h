@@ -75,12 +75,14 @@ private:
 	int coordx, coordy, dir, comb, vel, maxx, maxy;
 
 public:
-	Coche(int x, int y, int d, int c, int v) {
+	Coche(int x, int y, int d, int c, int v, int mm, int my) {
 		coordx = x;
 		coordy = y;
 		dir = d;
 		comb = c;
 		vel = v;
+		maxx = mm;
+		maxy = my;
 	}
 	Coche() {
 		coordx = 0;
@@ -88,13 +90,17 @@ public:
 		dir = 0;
 		comb = 100;
 		vel = 0;
+		maxx = 10;
+		maxy = 10;
 	}
 
 	void acelerar() {
+		//Añadir una probabilidad del 3% de que el motor se gripe y se pare en seco si sucede la función devolverá false, si no true
 		vel = vel + 1;
 	}
 
 	void frenar() {
+		//Añadir una probabilidad del 5% de que le fallen los frenos y no frene si sucede la función devolverá false, si no true
 		vel = vel - 1;
 	}
 
@@ -106,10 +112,11 @@ public:
 			}
 			else {
 				coordy = coordy - vel;
+
 				comb = comb - (vel / 2);
 			}
 		case 1: //Este
-			if (coordx != maxx) {
+			if (coordx <= maxx) {
 				coordx = coordx + vel;
 				comb = comb - (vel / 2);
 			}
@@ -131,6 +138,7 @@ public:
 	}
 
 	void girar_derecha() {
+		//Añadir probabilidad del 10% de derrapar y girar 2 puntos en lugar de 1 si sucede la función devolverá false, si no true
 		if (dir == 3) {
 			dir = 0;
 		}
@@ -139,6 +147,7 @@ public:
 		}
 	}
 	void girar_izquierda() {
+		//Añadir probabilidad del 10% de derrapar y girar 2 puntos en lugar de 1 si sucede la función devolverá false, si no true
 		if (dir == 0) {
 			dir = 3;
 		}
@@ -149,6 +158,66 @@ public:
 	void girar_coche() {
 		vel = 0;
 	}
+
+	int getCoordx() {
+		return coordx;
+	} 
+
+	int getCoordy() {
+		return coordy;
+	}
+
+	int getDir() {
+		return dir;
+	}
+
+	int getComb() {
+		return comb;
+	}
+
+	int getVel() {
+		return vel;
+	}
+
+	int getMaxx() {
+		return maxx;
+	}
+
+	int getMaxy() {
+		return maxy;
+	}
+
+	void setCoordx(int c) {
+		coordx = c;
+	}
+
+	void setCoordy(int c) {
+		coordy = c;
+	}
+
+	void setDir(int c) {
+		dir = c;
+	}
+
+	void setComb(int c) {
+		comb = c;
+	}
+
+	void setVel(int c) {
+		vel = c;
+	}
+
+	void setMaxx(int c) {
+		maxx = c;
+	}
+
+	void setMaxy(int c) {
+		maxy = c;
+	}
+
+	
+
+
 };
 
 #endif // !_COCHE_
