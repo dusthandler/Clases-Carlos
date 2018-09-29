@@ -1,4 +1,5 @@
 #include<iostream>
+#include <time.h>
 
 #ifndef _PRODUCTO_
 #define _PRODUCTO_
@@ -94,14 +95,30 @@ public:
 		maxy = 10;
 	}
 
+	bool gripar() {
+			int grip = rand() % 100 + 1;
+			return(grip >= 1 && grip <= 3);
+		}
+
 	void acelerar() {
-		//Añadir una probabilidad del 3% de que el motor se gripe y se pare en seco si sucede la función devolverá false, si no true
-		vel = vel + 1;
+		if (gripar() == true) {
+			parar_coche();
+		}
+		
+		else {
+			vel = vel + 1;
+		}
+	}
+
+	bool fallo_frenos() {
+		int fallo = rand() % 100 + 1;
+		return(fallo >= 1 && fallo <= 5);
 	}
 
 	void frenar() {
-		//Añadir una probabilidad del 5% de que le fallen los frenos y no frene si sucede la función devolverá false, si no true
-		vel = vel - 1;
+		if (fallo_frenos() == false) {
+			vel = vel - 1;
+		}
 	}
 
 	void avanzar() {
@@ -137,25 +154,56 @@ public:
 		}
 	}
 
+	bool derrapar() {
+		int derrape = rand() % 100 + 1;
+		return (derrape >= 1 && derrape <= 10);
+	}
+
 	void girar_derecha() {
-		//Añadir probabilidad del 10% de derrapar y girar 2 puntos en lugar de 1 si sucede la función devolverá false, si no true
-		if (dir == 3) {
-			dir = 0;
+
+		if (derrapar == false) {
+			if (dir == 3) {
+				dir = 0;
+			}
+			else {
+				dir = dir + 1;
+			}
 		}
 		else {
-			dir = dir + 1;
+			if (dir == 3) {
+				dir = 1;
+			}
+			else if (dir == 2) {
+				dir = 0;
+			}
+			else {
+				dir = dir + 2;
+			}
 		}
 	}
 	void girar_izquierda() {
-		//Añadir probabilidad del 10% de derrapar y girar 2 puntos en lugar de 1 si sucede la función devolverá false, si no true
-		if (dir == 0) {
-			dir = 3;
+
+		if (derrapar == false) {
+			if (dir == 0) {
+				dir = 3;
+			}
+			else {
+				dir = dir - 1;
+			}
 		}
 		else {
-			dir = dir - 1;
+			if (dir == 0) {
+				dir = 2;
+			}
+			else if (dir == 1) {
+				dir = 3;
+			}
+			else {
+				dir = dir - 2;
+			}
 		}
 	}
-	void girar_coche() {
+	void parar_coche() {
 		vel = 0;
 	}
 
